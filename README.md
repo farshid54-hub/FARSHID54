@@ -1,112 +1,97 @@
-# github-sandbox
+## github-sandbox
+> **0x00 dl**
 
-# 📥 Download Files via Commit Message
+<br><br/>  
 
-A GitHub Actions workflow that lets you download files into your repository just by writing a special commit message — no terminal or command line needed.
+> [!NOTE]
+> 
+> **با این پروژه می‌توانید بدون نیاز به هیچ سرور یا نرم‌افزاری، محدودیت‌های تحمیلی را دور بزنید. لینک فایل‌های مستقیم، ویدیوهای یوتیوب یا فایل‌های قیمت releases گیت‌هاب یا فایل‌های سایت Bunkr را به این ربات بدهید تا در چند ثانیه آن‌ها را دانلود کرده و مستقیماً روی اکانت گیت‌هاب شما ذخیره کند. سپس می‌توانید فایل‌ها را با اینترنت داخلی بدون نیاز به vpn و سرعت بالا دانلود کنید.**  
+> 
+>
+>
 
----
+> [!WARNING]
+> **نکته:** بخاطر محدودیت‌ `MB_100` از سمت گیت‌هاب، ما ماکسیمم حجم مجاز برای هر فایل را پیش‌فرض `95_MB` قرار دادیم، در صورت بالاتر بودن حجم فایل از این مقدار؛ تکه تکه و فشرده (zip) خواهد شد.
+>
+> <br>
+>
+> <br/>
+>
 
-<details>
-<summary>⚙️ SETUP - CLICK HERE</summary><br/>
+<br/><br/>   
 
-## ⚙️ Setup
+## ⚙️ راهنمای نصب و راه‌اندازی (فقط برای بار اول)
 
-0. Fork this repo
-1. Go to your repository on GitHub
-2. Click **Settings** → **Actions** → **General**
-3. Scroll down to **Workflow permissions**
-4. Select **Read and write permissions** and click **Save**
+برای داشتن این ربات روی اکانت خودتان، مراحل زیر را یک‌بار انجام دهید:
 
-That's it — no tokens or secrets needed.
+### مرحله ۱: کپی کردن پروژه (Fork)
+1. در بالای همین صفحه، روی دکمه **Fork** کلیک کنید تا یک کپی از این پروژه در اکانت شما ساخته شود.
+2. نام دلخواه خود را وارد کرده و دکمه **Create fork** را بزنید.
+<br/>
 
----
+### مرحله ۲: دادن دسترسیِ ذخیره فایل به ربات
+1. در مخزن خودتان (پروژه‌ای که فورک کردید)، به تب **Settings** بروید.
+2. از منوی سمت چپ، روی **Actions** و سپس **General** کلیک کنید.
+3. تا انتهای صفحه اسکرول کرده تا به بخش **Workflow permissions** برسید.
+4. گزینه **Read and write permissions** را انتخاب کرده و دکمه **Save** را بزنید.
 
-## 🚀 Usage
+<br/>	 
 
-You trigger downloads by editing any file directly on GitHub and using a special commit message when saving.
+### مرحله ۳: روشن کردن ربات (Enable Actions)
+1. به تب **Actions** در بالای صفحه بروید.
+2. یک دکمه بزرگ سبز رنگ می‌بینید که نوشته `I understand my workflows, go ahead and enable them`. روی آن کلیک کنید تا سیستم ربات‌ها برای شما فعال شود.
 
-### How to trigger a download
+<br/>   
 
-1. Open any file in your repository on GitHub (for example, this `README.md`)
-2. Click the **pencil icon** (✏️) at the top right to edit it
-3. Make any small change (add a space, a blank line, anything)
-4. Scroll down to the **Commit changes** section
-5. Select **Commit directly to the `main` branch**
-6. In the commit message box, type one of the commands below
-7. Click **Commit changes**
+## 🍪 مرحله ۴ (اختیاری اما توصیه شده): تنظیمات یوتیوب
+اگر قصد دارید ویدیوهای یوتیوب را دانلود کنید، سیستمِ ضدرباتِ یوتیوب جلوی دانلود را می‌گیرد. برای رفع این مشکل، باید یک‌بار کوکیِ مرورگر خود را به ربات بدهید:
 
-The workflow will run automatically and the downloaded files will appear in the `downloads/` folder.
+1. **نصب افزونه:** ابتدا افزونه `Get cookies.txt LOCALLY` را روی مرورگر کامپیوتر خود نصب کنید:
+   - [لینک دانلود برای مرورگر Chrome](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc)
+   - [لینک دانلود برای مرورگر Firefox](https://addons.mozilla.org/en-US/firefox/addon/get-cookies-txt-locally/)
+2. **دریافت کوکی:** در مرورگر خود وارد سایت YouTube شوید و به حساب کاربری خود لاگین کنید (پیشنهاد می‌شود برلی احتیاط از یک اکانت فرعی جی‌یمیل استفاده کنید).
+4. روی آیکون افزونه‌ای که نصب کردید کلیک کنید و گزینه **Export** را بزنید. فایلی به نام `www.youtube.com_cookies.txt` دانلود می‌شود.
+5. **ثبت در گیت‌هاب:** فایل را با Notepad باز کرده و **کل محتوای آن** را کپی کنید.
+6. به گیت‌هاب برگردید. به این مسیر بروید:  
+**Settings** -> **Secrets and variables** -> **Actions**  
 
----
+8. روی دکمه **New repository secret** کلیک کنید.
+9. در کادر Name بنویسید:
 
-## 📝 Commands
-
-### Download files individually
-
-Downloads each file and saves it by its original filename.
-
-```
-download: URL1 URL2 URL3
-```
-
-**Examples:**
-
-```
-download: https://example.com/file.zip
-```
-
-```
-download: https://example.com/a.zip https://example.com/b.pdf https://example.com/c.zip
-```
-
----
-
-### Download and archive into a single ZIP
-
-Downloads all files and bundles them into one timestamped `.zip` archive saved to `downloads/`.
-
-```
-download-zip: URL1 URL2 URL3
+```css
+YOUTUBE_COOKIES
 ```
 
-**Examples:**
+11. در کادر Secret، محتوای فایل txtی که در قدم پنجم کپی کرده بودید را کامل Paste کنید و دکمه **Add secret** را بزنید.
 
-```
-download-zip: https://example.com/file.zip
-```
+<hr/><br/>   
 
-```
-download-zip: https://example.com/a.zip https://example.com/b.pdf https://example.com/c.zip
-```
+## 📋 راهنمای استفاده و دانلود فایل‌ها
 
-The resulting archive will be named like: `archive_20250423_153012.zip`
+### چگونه دانلود کنم؟
+1. به تب **Actions** بروید.
+2. از منوی سمت چپ روی **📥 0x00 dl** کلیک کنید. (اگر کاربر موبایل هستید در تب اکشن روی all workflows کلیک کرده و 0x00 dl را انتخاب کنید)
+3. در سمت راست، روی دکمه **Run workflow** کلیک کنید.
+4. منویی برای شما باز می‌شود:
+   - **لینک دانلود:** لینک ویدیو یا فایل خود را وارد کنید.
+   - **کیفیت:** کیفیت مد نظر را انتخاب کنید (توصیه می‌شود کیفیت 480p یا 720p را انتخاب کنید تا حجم فایل زیر ۹۵ مگابایت بماند و تکه‌تکه نشود).
+   - **رمز (اختیاری):** اگر مایل بودید روی فایل نهایی رمز بگذارید.
+5. روی دکمه سبز رنگ **Run workflow** کلیک کنید و یک الی دو دقیقه صبر کنید تا دانلود تمام شود و تیک سبز رنگ ظاهر شود.
 
----
+### چگونه فایل را دریافت کنم؟
+1. به تب **Code** (صفحه اصلی پروژه) بروید.
+2. وارد پوشه **dl** شوید. فایل دانلود شده‌ی شما با همان اسم فایل آنجاست.
+3. حال باید روی فایل کلیک کنید.
+4. در سمت راست، روی دکمه **سه نقطه (...)** کلیک کنید.
+5. برای دانلود مستقیم، روی **Download** کلیک کنید. 
+6. و یا اگر از دانلود منیجر استفاده می‌کنید، مجددا روی دکمه سه نقطه کلیک کرده و روی گزینه `View` راست‌کلیک کرده و گزینه `Copy link address` را بزنید تا لینک خام (Raw) کپی شود، (اگر کاربر موبایل هستید انگشت خود را چند ثانیه روی گزینه‌ی `view` نگه‌دارید تا منوی آپشن ظاهر شود سپس روی گزینه‌‌ی `copy link address` کلیک کنید.)
 
-## 📁 Output
+<hr/><br/> 
 
-| Command | Result |
-|---|---|
-| `download:` | Each file saved individually in `downloads/` with its original name |
-| `download-zip:` | All files bundled into a single `archive_YYYYMMDD_HHMMSS.zip` in `downloads/` |
 
----
+> [!CAUTION]
+> 
+> با تشکر بسیار از توسعه دهنده اصلی [maanimis][1] جهت توسعه‌ی پروژه‌ای خلاقانه‌ و پتانسیل بالا.
 
-## 👀 Checking the result
 
-After committing, you can monitor the workflow:
-
-1. Click the **Actions** tab in your repository
-2. Click the latest workflow run to see progress and logs
-3. Once it completes, go back to the **Code** tab and open the `downloads/` folder to find your files
-
----
-
-## ⚠️ Notes
-
-- URLs must be publicly accessible (no login required)
-- Separate multiple URLs with spaces
-- The workflow skips itself using `[skip ci]` in its own commit message to avoid infinite loops
-- If no valid `download:` or `download-zip:` command is found in the commit message, the workflow will exit without doing anything
-
-</details>
+[1]: https://github.com/maanimis/github-sandbox
